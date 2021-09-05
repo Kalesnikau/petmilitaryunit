@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div>
+    <h1>Registration and Login with Spring Boot, Spring Security,
+        Thymeleaf, Hibernate and MySQL</h1>
+
+    Welcome <li sec:authorize="isAuthenticated()"><span sec:authentication="principal.username"> User</span></li>
+</div>
+
+<div sec:authorize="isAuthenticated()">
+    <a th:href="@{/logout}"> logout </a>
+</div>
+
+<div>
+    <a th:href="@{/info}"> information </a>
+    <br>
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admininfo}"> admin <br> </a>
+    <a sec:authorize="hasAuthority('PREMIUM')" th:href="@{/donut}"> donater <br> </a>
+    <a sec:authorize="!isAuthenticated()" th:href="@{/login}"> login </a>
+    <br>
+    <a th:href="@{/registration}"> registration </a>
+    <br>
+</div>
+
+
+
+<div sec:authorize="isAuthenticated()">
+    <a sec:authentication="principal.username"> admin <br> </a>
+    <a sec:authentication="principal.password"> admin <br> </a>
+    <a sec:authentication="principal.authorities"> admin <br> </a>
+</div>
+
+</body>
+</html>

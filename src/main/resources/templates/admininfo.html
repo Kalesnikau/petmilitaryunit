@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+admin
+<div>
+  <a th:href="@{/}"> home</a>
+</div>
+
+<table>
+  <!--/*@thymesVar id="users" type="by.kalesnikau.petmilitaryunit.model.UserEntity"*/-->
+  <tr th:each="user : ${users}">
+    <td> <p th:text="${user.getId()}"> </p>
+    </td>
+    <td>
+    <p th:text="${user.getUsername()}"> </p>
+    </td>
+    <td> <p th:text="${user.getPassword()}"> </p>
+    </td>
+    <td> <div th:each="perm : ${user.getAuthorities()}">
+      <p th:text="${perm.getAuthority()}"></p>
+    </div>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+donate
+<div>
+  <a th:href="@{/}"> home</a>
+</div>
+<table>
+  <tr th:each="donut : ${donuts}">
+    <td> <p th:text="${donut.getId()}"> </p>
+    </td>
+    <td>
+      <p th:text="${donut.getName()}"> </p>
+      <form th:method="PATCH" th:action="@{/donut/{id}(id=${donut.getId()})}" th:object="${donuttoupdate}">
+        <input type="text" id="name" name="name" th:value="${donut.getName()}"/>
+        <input type="submit" value="Create!"/>
+      </form>
+    </td>
+    <td>
+    <form th:method="DELETE" th:action="@{/donut/{id}(id=${donut.getId()})}" >
+      <input type="submit" value="Delete"/>
+    </form>
+    </td>
+  </tr>
+</table>
+
+<!--/*@thymesVar id="donuttosave" type="by.kalesnikau.petmilitaryunit.model.DonutEntity"*/-->
+<form th:method="POST" th:action="@{/donut}" th:object="${donuttosave}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <br/>
+  <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>
